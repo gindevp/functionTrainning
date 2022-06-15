@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+function nhoNhat(x,y,z){
+if(x>y){
+    if(y<z){
+        return y;
+    }else {
+        return z;
+    }
+}else {
+    if(x<z){
+        return x;
+    }else {
+        return z;
+    }
+}
+}
+let a= prompt("nhap a")
+let b= prompt("nhap b")
+let c= prompt("nhap c")
+let min= nhoNhat(a,b,c)
+alert("min là "+min)
+</script>
+</body>
+</html>
