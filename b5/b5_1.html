@@ -14,7 +14,7 @@
 <div style="background-color:#d2eae3">
     <label for="name">NAME</label>
     <input id="name" type="text" placeholder="New Product"/>
-    <button type="button" class="btn btn-primary" onclick="add()">Add</button>
+    <button type="button" class="btn btn-primary" id="input" onclick="add()">Add</button>
 </div>
 <br>
 <div><strong>Display All Product</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label
@@ -23,12 +23,7 @@
 <br>
 <div>
     <table class="table table-striped" id="render">
-        <thead>
-        <tr>
-            <!--                        <th>ID</th>-->
-            <th>NAME</th>
-        </tr>
-        </thead>
+
     </table>
 </div>
 </body>
@@ -55,31 +50,34 @@
             ID: 5,
             NAME: "quyet79"
         }]
-    var temp = data.length;
+
     render()
 
-    document.getElementById("count").innerText = temp + " " + "Product";
+
 
     function add() {
         // var item_id = document.getElementById("id").value;
         var item_name = document.getElementById("name").value;
         console.log(data.length)
-        for (let i = 1; i < data.length + 2; i++) {
-            var item = {
-                ID: i,
-                NAME: item_name,
-            }
-            console.log("id:" + i)
-        }
-
-        let index = data.findIndex((c) => c.ID == item.ID)
-        console.log()
-        console.log("index"+index)
-        if (index >= 0) {
-            data.splice(index, 1, item)
-        }else{console.log(index);
-            data.push(item);}
-
+        // for (let i = 1; i < data.length + 2; i++) {
+        //     var item = {
+        //         ID: i,
+        //         NAME: item_name,
+        //     }
+        //     console.log("id:" + i)
+        // }
+        //
+        // let index = data.findIndex((c) => c.ID == item.ID)
+        // console.log(item.ID)
+        // console.log("index" + index)
+        // if (index >= 0) {
+        //     data.splice(index, 1, item)
+        // } else {
+        //     console.log(index);
+        //     data.push(item);
+        // }
+        data[data.length] = {ID:(data.length+1), NAME: item_name}
+        document.getElementById("count").innerText = data.length + " " + "Product";
         render();
         clear();
         console.log(data);
@@ -100,6 +98,8 @@
             </tr>`
         }
         document.getElementById("render").innerHTML = table;
+        document.getElementById("count").innerText = data.length + " " + "Product";
+
     }
 
     function clear() {
@@ -114,13 +114,27 @@
             }
         }
     }
-
+    let index
     function editItem(id) {
         for (let i = 0; i < data.length; i++) {
-            if (data[i].ID == id) {
+            if (data[i].ID === id) {
+                index = data[i].ID
                 document.getElementById("name").value = data[i].NAME
+                document.getElementById("input").setAttribute("onclick","edit()");
             }
-
         }
+    }
+
+
+
+    function edit() {
+        let name = document.getElementById("name").value
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].ID === index) {
+                data[i].NAME = name
+            }
+        }
+        render()
+        clear()
     }
 </script>
