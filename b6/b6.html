@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Các sản phẩm: </h2>
+<p id="ds"><br></p>
+<button type="button" onclick="add(matHang)">Thêm</button>
+<button type="button" onclick="edit(matHang)">Sửa</button>
+<button type="button" onclick="xoa(matHang)">Xóa</button>
+
+<script>
+    function isPalindrome(){
+
+    }
+    if(IsNumber(s, n) == false){
+        printf("\nBan nhap sai dinh dang!");
+        return 0;
+    }
+    bool isPar = true;
+
+    int i = 0, j = n - 1;
+    while(i < j){
+        if(s[i] != s[j]){
+            isPar = false;
+            break;
+        }else{
+            ++i; // Tang dau
+            --j; // Giam cuoi
+        }
+    }
+    if(isPar == true){
+        printf("%s la so doi xung!", s);
+    }else{
+        printf("%s khong la so doi xung!", s);
+    }
+</script>
+</body>
+</html>

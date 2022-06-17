@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<div><label><strong><h3>Add New Product</h3></strong></label></div>
+<!--<div>-->
+<!--    <label for="id">ID</label>-->
+<!--    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="id" type="number"/>-->
+<!--</div>-->
+<div style="background-color:#d2eae3">
+    <label for="name">NAME</label>
+    <input id="name" type="text" placeholder="New Product"/>
+    <button type="button" class="btn btn-primary" onclick="add()">Add</button>
+</div>
+<br>
+<div><strong>Display All Product</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label
+        id="count" style="color: red"></label>
+</div>
+<br>
+<div>
+    <table class="table table-striped" id="render">
+        <thead>
+        <tr>
+            <!--                        <th>ID</th>-->
+            <th>NAME</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+</body>
+</html>
+<script>
+
+    var data = [{
+        ID: 1,
+        NAME: "quyet79"
+    },
+        {
+            ID: 2,
+            NAME: "quyet79"
+        },
+        {
+            ID: 3,
+            NAME: "quyet79"
+        },
+        {
+            ID: 4,
+            NAME: "quyet79"
+        },
+        {
+            ID: 5,
+            NAME: "quyet79"
+        }]
+    var temp = data.length;
+    render()
+
+    document.getElementById("count").innerText = temp + " " + "Product";
+
+    function add() {
+        // var item_id = document.getElementById("id").value;
+        var item_name = document.getElementById("name").value;
+        console.log(data.length)
+        for (let i = 1; i < data.length + 2; i++) {
+            var item = {
+                ID: i,
+                NAME: item_name,
+            }
+            console.log("id:" + i)
+        }
+
+        let index = data.findIndex((c) => c.ID == item.ID)
+        console.log()
+        console.log("index"+index)
+        if (index >= 0) {
+            data.splice(index, 1, item)
+        }else{console.log(index);
+            data.push(item);}
+
+        render();
+        clear();
+        console.log(data);
+    }
+
+    function render() {
+        table = `<tr>
+<!--                <th>ID</th>-->
+                <th>NAME</th>
+                <th></th>
+                <th></th>
+            </tr>`
+        for (let i = 0; i < data.length; i++) {
+            table += `<tr>
+                <td>${data[i].NAME}</td>
+                <td><button  class="btn btn-primary" onclick=deleteItem(${data[i].ID})>Delete</button></td>
+                <td><button class="btn btn-primary" onclick=editItem(${data[i].ID})>Edit</button></td>
+            </tr>`
+        }
+        document.getElementById("render").innerHTML = table;
+    }
+
+    function clear() {
+        document.getElementById("name").value = ""
+    }
+
+    function deleteItem(id) {
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].ID == id) {
+                data.splice(i, 1);
+                render();
+            }
+        }
+    }
+
+    function editItem(id) {
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].ID == id) {
+                document.getElementById("name").value = data[i].NAME
+            }
+
+        }
+    }
+</script>
